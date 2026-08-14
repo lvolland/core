@@ -1,76 +1,131 @@
 /**
- * Find the tokens in the given code and call the given callback
+ * Replace how language names are loaded, call it before highlighting
  *
- * @function tokenize
- * @param {string} src The code
- * @param {ShjLanguage|Array} lang The language of the code
- * @param {function(string, ShjToken=):void} token The callback function
- * this function will be given
- * * the text of the token
- * * the type of the token
+ * @example
+ * setLoader(name => customs[name] ?? defaultLoader(name));
+ *
+ * @param {ShjLanguageLoader} newLoader Given a name, returns the language, its module, or a promise of either
  */
-export function tokenize(src: string, lang: ShjLanguage | any[], token: (arg0: string, arg1: ShjToken | undefined) => void): Promise<void>;
+export function setLoader(newLoader: ShjLanguageLoader): void;
+/**
+ * Find the tokens in the given code and call the given callback,
+ * bundled languages are loaded on first use
+ *
+ * @param {string} src The code
+ * @param {ShjLanguage|ShjLanguageData} lang The language of the code
+ * @param {ShjTokenCallback} onToken Called with the text and type of each token
+ * @returns {Promise<void>} Resolves once every token has been emitted
+ */
+export function tokenize(src: string, lang: ShjLanguage | ShjLanguageData, onToken: ShjTokenCallback): Promise<void>;
 /**
  * Highlight a string passed as argument and return it
  * @example
- * elm.innerHTML = await highlightText(code, 'js');
+ * elm.innerHTML = await highlightHTML(code, 'js');
  *
- * @async
- * @function highlightText
  * @param {string} src The code
- * @param {ShjLanguage} lang The language of the code
- * @param {Boolean} [multiline=true] If it is multiline, it will add a wrapper for the line numbering and header
+ * @param {ShjLanguage|ShjLanguageData} lang The language of the code
  * @param {ShjOptions} [opt={}] Customization options
  * @returns {Promise<string>} The highlighted string
  */
-export function highlightText(src: string, lang: ShjLanguage, multiline?: boolean, opt?: ShjOptions): Promise<string>;
+export function highlightHTML(src: string, lang: ShjLanguage | ShjLanguageData, opt?: ShjOptions): Promise<string>;
 /**
- * Highlight a DOM element by getting the new innerHTML with highlightText
+ * Highlight a DOM element by getting the new innerHTML with highlightHTML
  *
- * @async
- * @function highlightElement
  * @param {Element} elm The DOM element
- * @param {ShjLanguage} [lang] The language of the code (seaching by default on `elm` for a 'shj-lang-' class)
- * @param {ShjDisplayMode} [mode] The display mode (guessed by default)
- * @param {ShjOptions} [opt={}] Customization options
+ * @param {ShjLanguage} [lang] The language of the code (searching by default on `elm` for a 'shj-lang-' class)
+ * @param {ShjOptions} [opt={}] Customization options, `block` defaults to the element: a `code` element is inline
+ * @returns {Promise<void>} Resolves once the element has been highlighted
  */
-export function highlightElement(elm: Element, lang?: ShjLanguage, mode?: ShjDisplayMode, opt?: ShjOptions): Promise<void>;
-export function highlightAll(opt?: ShjOptions): Promise<void[]>;
-export function loadLanguage(languageName: string, language: {
-    default: ShjLanguageDefinition;
-}): void;
+export function highlightElement(elm: Element, lang?: ShjLanguage, opt?: ShjOptions): Promise<void>;
 /**
- * Default languages supported
+ * Call highlightElement on element with a css class starting with `shj-lang-`
+ *
+ * @param {ShjOptions} [opt={}] Customization options
+ * @returns {Promise<void[]>} Resolves once every element has been highlighted
  */
-export type ShjLanguage = ("asm" | "bash" | "bf" | "c" | "css" | "csv" | "diff" | "docker" | "git" | "go" | "html" | "http" | "ini" | "java" | "js" | "jsdoc" | "json" | "leanpub-md" | "log" | "lua" | "make" | "md" | "pl" | "plain" | "py" | "regex" | "rs" | "sql" | "todo" | "toml" | "ts" | "uri" | "xml" | "yaml");
+export function highlightAll(opt?: ShjOptions): Promise<void[]>;
+/**
+ * Highlight a string passed as argument and return a string that can directly
+ * be printed in a terminal, bundled languages are loaded on first use
+ *
+ * @param {string} src The code
+ * @param {ShjLanguage|ShjLanguageData} lang The language of the code
+ * @param {ShjTerminalTheme} theme The theme to use, e.g. imported from `themes/atom-dark.js`
+ * @returns {Promise<string>} The highlighted string
+ */
+export function highlightANSI(src: string, lang: ShjLanguage | ShjLanguageData, theme: ShjTerminalTheme): Promise<string>;
+/**
+ * Loader of the bundled languages, can be called
+ * by a custom loader as its fallback
+ *
+ * @type {ShjLanguageLoader}
+ */
+export const defaultLoader: ShjLanguageLoader;
+/**
+ * Languages bundled by default
+ */
+export type ShjBuiltinLanguage = ("asm" | "bash" | "bf" | "c" | "css" | "csv" | "diff" | "docker" | "git" | "go" | "html" | "http" | "ini" | "java" | "js" | "jsdoc" | "json" | "leanpub-md" | "log" | "lua" | "make" | "md" | "pl" | "plain" | "py" | "regex" | "rs" | "sql" | "todo" | "toml" | "ts" | "uri" | "xml" | "yaml");
+/**
+ * A bundled language or any name the loader can give
+ */
+export type ShjLanguage = ShjBuiltinLanguage | (string & {});
+/**
+ * Republished from `tokenize.js` so writing a custom language only
+ * takes the main entry, even for the types it never mentions itself
+ */
+export type ShjToken = import("./tokenize.js").ShjToken;
+/**
+ * Republished from `tokenize.js` so writing a custom language only
+ * takes the main entry, even for the types it never mentions itself
+ */
+export type ShjMatcher = import("./tokenize.js").ShjMatcher;
+/**
+ * Republished from `tokenize.js` so writing a custom language only
+ * takes the main entry, even for the types it never mentions itself
+ */
+export type ShjLanguageData = import("./tokenize.js").ShjLanguageData;
+/**
+ * Republished from `tokenize.js` so writing a custom language only
+ * takes the main entry, even for the types it never mentions itself
+ */
+export type ShjRule = import("./tokenize.js").ShjRule;
+/**
+ * Republished from `tokenize.js` so writing a custom language only
+ * takes the main entry, even for the types it never mentions itself
+ */
+export type ShjGrammar = import("./tokenize.js").ShjGrammar;
+/**
+ * Republished from `tokenize.js` so writing a custom language only
+ * takes the main entry, even for the types it never mentions itself
+ */
+export type ShjTokenCallback = import("./tokenize.js").ShjTokenCallback;
+/**
+ * Give a language for the asked name: the language, its module, or a promise of either
+ */
+export type ShjLanguageLoader = (name: string) => ShjLanguageData | {
+    default: ShjLanguageData;
+} | Promise<ShjLanguageData | {
+    default: ShjLanguageData;
+}> | undefined;
 /**
  * Themes supported in the browser
  */
 export type ShjBrowserTheme = ("atom-dark" | "github-dark" | "github-dim" | "dark" | "default" | "github-light" | "visual-studio-dark");
+/**
+ * A theme, mapping each token type to the ANSI escape printed before it
+ */
+export type ShjTerminalTheme = Partial<Record<ShjToken, string>>;
 export type ShjOptions = {
     /**
-     * Indicates whether to hide line numbers
+     * Render as a block, with the line numbering
+     * and header wrapper, rather than inline. `highlightElement` defaults it from
+     * the element instead: a `code` element is inline, anything else is a block
      */
-    hideLineNumbers?: boolean;
+    block?: boolean;
+    /**
+     * Indicates whether to number the
+     * lines, in a gutter laid out inside the block
+     */
+    showLineNumbers?: boolean;
 };
-/**
- * * `inline` inside `code` element
- * * `oneline` inside `div` element and containing only one line
- * * `multiline` inside `div` element
- */
-export type ShjDisplayMode = ("inline" | "oneline" | "multiline");
-/**
- * Token types
- */
-export type ShjToken = ("deleted" | "err" | "var" | "section" | "kwd" | "class" | "cmnt" | "insert" | "type" | "func" | "bool" | "num" | "oper" | "str" | "esc");
-export type ShjLanguageComponent = {
-    match: RegExp;
-    type: string;
-} | {
-    match: RegExp;
-    sub: string | ShjLanguageDefinition | ((code: string) => ShjLanguageComponent);
-} | {
-    expand: string;
-};
-export type ShjLanguageDefinition = ShjLanguageComponent[];
 //# sourceMappingURL=index.d.ts.map

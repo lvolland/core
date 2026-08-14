@@ -1,12 +1,22 @@
-declare const _default: ({
-    match: RegExp;
-    sub: string;
-    type?: undefined;
-} | {
-    type: string;
-    match: RegExp;
-    sub?: undefined;
-})[];
+declare namespace _default {
+    let type: "oper";
+    let sub: ({
+        match: RegExp;
+        type: "cmnt";
+        sub: string;
+    } | {
+        type: "num";
+        match: RegExp;
+        sub?: undefined;
+    } | {
+        type: "kwd";
+        match: RegExp;
+        sub?: undefined;
+    } | {
+        type: "var";
+        match: RegExp;
+        sub?: undefined;
+    })[];
+}
 export default _default;
-export let type: string;
 //# sourceMappingURL=regex.d.ts.map

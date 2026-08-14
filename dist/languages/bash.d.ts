@@ -1,14 +1,10 @@
 declare const _default: ({
-    type: string;
-    match: RegExp;
-} | {
-    sub: string;
-    match: RegExp;
+    match: import("../tokenize.js").ShjMatcher;
+    type?: import("../tokenize.js").ShjToken;
+    sub?: string | import("../tokenize.js").ShjGrammar | ((code: string) => string | import("../tokenize.js").ShjLanguageData);
     expand?: undefined;
 } | {
-    expand: string;
-    sub?: undefined;
-    match?: undefined;
+    expand: "num";
 })[];
 export default _default;
 //# sourceMappingURL=bash.d.ts.map

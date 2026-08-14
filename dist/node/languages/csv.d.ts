@@ -1,9 +1,9 @@
 declare const _default: ({
-    expand: string;
+    expand: "strDouble";
     type?: undefined;
     match?: undefined;
 } | {
-    type: string;
+    type: "oper";
     match: RegExp;
     expand?: undefined;
 })[];

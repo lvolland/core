@@ -1,18 +1,43 @@
 declare const _default: ({
     match: RegExp;
+    type: "cmnt";
     sub: string;
-    type?: undefined;
     expand?: undefined;
 } | {
-    type: string;
+    type: "str";
     match: RegExp;
     sub?: undefined;
     expand?: undefined;
 } | {
-    expand: string;
+    expand: "str";
     match?: undefined;
-    sub?: undefined;
     type?: undefined;
+    sub?: undefined;
+} | {
+    expand: "num";
+    match?: undefined;
+    type?: undefined;
+    sub?: undefined;
+} | {
+    type: "kwd";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    type: "func";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    type: "class";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    type: "oper";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
 })[];
 export default _default;
 //# sourceMappingURL=go.d.ts.map

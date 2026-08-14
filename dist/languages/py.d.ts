@@ -1,13 +1,13 @@
 declare const _default: ({
     match: RegExp;
+    type: "cmnt";
     sub: string;
-    type?: undefined;
     expand?: undefined;
 } | {
-    type: string;
+    type: "str";
     match: RegExp;
     sub: {
-        type: string;
+        type: "var";
         match: RegExp;
         sub: {
             match: RegExp;
@@ -16,12 +16,37 @@ declare const _default: ({
     }[];
     expand?: undefined;
 } | {
-    expand: string;
+    expand: "str";
     match?: undefined;
-    sub?: undefined;
     type?: undefined;
+    sub?: undefined;
 } | {
-    type: string;
+    type: "kwd";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    type: "bool";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    expand: "num";
+    match?: undefined;
+    type?: undefined;
+    sub?: undefined;
+} | {
+    type: "func";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    type: "oper";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    type: "class";
     match: RegExp;
     sub?: undefined;
     expand?: undefined;

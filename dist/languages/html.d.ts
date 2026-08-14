@@ -1,45 +1,56 @@
 declare const _default: ({
     match: RegExp;
+    sub: import("../index.js").ShjGrammar;
+} | {
+    match: RegExp;
+    type: "cmnt";
+    sub: string;
+} | {
+    type: "class";
+    match: RegExp;
+    sub?: undefined;
+} | {
+    type: "str";
+    match: RegExp;
     sub: ({
-        type: string;
+        type: "var";
         match: RegExp;
         sub: {
-            type: string;
+            type: "oper";
             match: RegExp;
         }[];
     } | {
-        type: string;
+        type: "oper";
         match: RegExp;
         sub?: undefined;
     })[];
 } | {
-    match: RegExp;
-    sub: string;
-    type?: undefined;
-} | {
-    type: string;
+    type: "var";
     match: RegExp;
     sub?: undefined;
+} | {
+    type: "class";
+    match: RegExp;
+    sub: ({
+        type: "str";
+        match: RegExp;
+    } | {
+        type: "oper";
+        match: RegExp;
+    } | {
+        type: "var";
+        match: RegExp;
+    })[];
 } | {
     match: RegExp;
     sub: ({
         match: RegExp;
-        sub: ({
-            type: string;
-            match: RegExp;
-            sub: {
-                type: string;
-                match: RegExp;
-            }[];
-        } | {
-            type: string;
-            match: RegExp;
-            sub?: undefined;
-        })[];
+        sub: import("../index.js").ShjGrammar;
     } | {
         match: RegExp;
         sub: string;
     })[];
+    type?: undefined;
 })[];
 export default _default;
 //# sourceMappingURL=html.d.ts.map

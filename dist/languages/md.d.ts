@@ -1,22 +1,38 @@
 declare const _default: ({
-    type: string;
+    type: "cmnt";
+    match: RegExp;
+    sub?: undefined;
+} | {
+    type: "class";
     match: RegExp;
     sub?: undefined;
 } | {
     match: RegExp;
-    sub: (code: any) => {
-        type: string;
+    sub: (code: string) => {
+        type: "kwd";
         sub: {
             match: RegExp;
-            sub: any;
+            sub: string;
         }[];
     };
     type?: undefined;
 } | {
-    type: string;
+    type: "str";
+    match: RegExp;
+    sub?: undefined;
+} | {
+    type: "var";
+    match: RegExp;
+    sub?: undefined;
+} | {
+    type: "kwd";
+    match: RegExp;
+    sub?: undefined;
+} | {
+    type: "func";
     match: RegExp;
     sub: {
-        type: string;
+        type: "oper";
         match: RegExp;
     }[];
 })[];

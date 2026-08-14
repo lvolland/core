@@ -1,25 +1,30 @@
 declare const _default: ({
     match: RegExp;
+    type: "cmnt";
     sub: string;
     expand?: undefined;
-    type?: undefined;
 } | {
-    expand: string;
+    expand: "str";
     match?: undefined;
-    sub?: undefined;
     type?: undefined;
+    sub?: undefined;
 } | {
-    type: string;
+    expand: "num";
+    match?: undefined;
+    type?: undefined;
+    sub?: undefined;
+} | {
+    type: "kwd";
     match: RegExp;
     sub: {
-        type: string;
+        type: "str";
         match: RegExp;
     }[];
     expand?: undefined;
 } | {
     match: RegExp;
     sub: ({
-        type: string;
+        type: "kwd";
         match: RegExp;
         sub?: undefined;
     } | {
@@ -27,10 +32,25 @@ declare const _default: ({
         sub: string;
         type?: undefined;
     })[];
-    expand?: undefined;
     type?: undefined;
+    expand?: undefined;
 } | {
-    type: string;
+    type: "kwd";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    type: "oper";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    type: "func";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    type: "class";
     match: RegExp;
     sub?: undefined;
     expand?: undefined;

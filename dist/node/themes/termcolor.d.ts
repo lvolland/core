@@ -1,13 +1,10 @@
-declare namespace _default {
-    let black: string;
-    let red: string;
-    let green: string;
-    let gray: string;
-    let yellow: string;
-    let blue: string;
-    let magenta: string;
-    let cyan: string;
-    let white: string;
-}
-export default _default;
+export const black: "\u001B[30m";
+export const red: "\u001B[31m";
+export const green: "\u001B[32m";
+export const gray: "\u001B[90m";
+export const yellow: "\u001B[33m";
+export const blue: "\u001B[34m";
+export const magenta: "\u001B[35m";
+export const cyan: "\u001B[36m";
+export const white: "\u001B[37m";
 //# sourceMappingURL=termcolor.d.ts.map

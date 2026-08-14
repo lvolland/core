@@ -1,15 +1,40 @@
 declare const _default: ({
     match: RegExp;
+    type: "cmnt";
     sub: string;
     expand?: undefined;
-    type?: undefined;
 } | {
-    expand: string;
+    expand: "str";
     match?: undefined;
-    sub?: undefined;
     type?: undefined;
+    sub?: undefined;
 } | {
-    type: string;
+    type: "func";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    type: "kwd";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    type: "num";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    type: "bool";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    type: "oper";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    type: "var";
     match: RegExp;
     sub?: undefined;
     expand?: undefined;

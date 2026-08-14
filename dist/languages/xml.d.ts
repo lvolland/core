@@ -1,40 +1,38 @@
 export let name: string;
 export let properties: string;
-export namespace xmlElement {
-    let match: RegExp;
-    let sub: ({
-        type: string;
-        match: RegExp;
-        sub: {
-            type: string;
-            match: RegExp;
-        }[];
-    } | {
-        type: string;
-        match: RegExp;
-        sub?: undefined;
-    })[];
-}
+/** @type {{ match: RegExp, sub: import('../index.js').ShjGrammar }} */
+export let xmlElement: {
+    match: RegExp;
+    sub: import("../index.js").ShjGrammar;
+};
 declare const _default: ({
     match: RegExp;
+    sub: import("../index.js").ShjGrammar;
+} | {
+    match: RegExp;
+    type: "cmnt";
+    sub: string;
+} | {
+    type: "class";
+    match: RegExp;
+    sub?: undefined;
+} | {
+    type: "str";
+    match: RegExp;
     sub: ({
-        type: string;
+        type: "var";
         match: RegExp;
         sub: {
-            type: string;
+            type: "oper";
             match: RegExp;
         }[];
     } | {
-        type: string;
+        type: "oper";
         match: RegExp;
         sub?: undefined;
     })[];
 } | {
-    match: RegExp;
-    sub: string;
-    type?: undefined;
-} | {
-    type: string;
+    type: "var";
     match: RegExp;
     sub?: undefined;
 })[];

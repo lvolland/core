@@ -1,34 +1,52 @@
 declare const _default: ({
     match: RegExp;
+    type: "cmnt";
     sub: string;
     expand?: undefined;
-    type?: undefined;
 } | {
-    expand: string;
+    expand: "str";
     match?: undefined;
-    sub?: undefined;
     type?: undefined;
+    sub?: undefined;
 } | {
-    type: string;
+    type: "kwd";
     match: RegExp;
     sub?: undefined;
     expand?: undefined;
 } | {
-    type: string;
+    type: "var";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    type: "func";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    type: "num";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    type: "num";
     match: RegExp;
     sub: {
-        type: string;
+        type: "var";
         match: RegExp;
     }[];
     expand?: undefined;
 } | {
     match: RegExp;
-    sub: {
-        type: string;
+    sub: ({
+        type: "func";
         match: RegExp;
-    }[];
-    expand?: undefined;
+    } | {
+        type: "str";
+        match: RegExp;
+    })[];
     type?: undefined;
+    expand?: undefined;
 })[];
 export default _default;
 //# sourceMappingURL=css.d.ts.map

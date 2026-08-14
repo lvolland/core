@@ -1,1 +1,1 @@
-var b={black:"\x1B[30m",red:"\x1B[31m",green:"\x1B[32m",gray:"\x1B[90m",yellow:"\x1B[33m",blue:"\x1B[34m",magenta:"\x1B[35m",cyan:"\x1B[36m",white:"\x1B[37m"};export{b as default};
+var t="\x1B[30m",o="\x1B[31m",x="\x1B[32m",e="\x1B[90m",n="\x1B[33m",r="\x1B[34m",b="\x1B[35m",c="\x1B[36m",m="\x1B[37m";export{t as black,r as blue,c as cyan,e as gray,x as green,b as magenta,o as red,m as white,n as yellow};

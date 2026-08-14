@@ -1,18 +1,48 @@
 declare const _default: ({
     match: RegExp;
+    type: "cmnt";
     sub: string;
-    type?: undefined;
     expand?: undefined;
 } | {
-    type: string;
+    type: "str";
     match: RegExp;
     sub?: undefined;
     expand?: undefined;
 } | {
-    expand: string;
+    expand: "str";
     match?: undefined;
-    sub?: undefined;
     type?: undefined;
+    sub?: undefined;
+} | {
+    type: "section";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    type: "num";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    expand: "num";
+    match?: undefined;
+    type?: undefined;
+    sub?: undefined;
+} | {
+    type: "bool";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    type: "oper";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
+} | {
+    type: "var";
+    match: RegExp;
+    sub?: undefined;
+    expand?: undefined;
 })[];
 export default _default;
 //# sourceMappingURL=toml.d.ts.map
