@@ -1,11 +1,9 @@
 const fs = require('fs'),
 	path = require('path'),
-	{ setTheme, printHighlight } = require('@speed-highlight/core/terminal');
+	{ highlightANSI } = require('@speed-highlight/core'),
+	{ default: theme } = require('@speed-highlight/core/themes/default.js');
 
 const lang = process.argv[2] ?? 'js';
+const code = fs.readFileSync(path.resolve(__dirname, `../languages/test.${lang}`));
 
-setTheme('default').then(_ => {
-	const code = fs.readFileSync(path.resolve(__dirname, `../languages/test.${lang}`));
-
-	printHighlight(code, lang);
-});
+console.log(await highlightANSI(code.toString(), lang, theme));

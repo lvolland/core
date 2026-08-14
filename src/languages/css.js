@@ -1,6 +1,11 @@
-export default [
+/**
+ * @name CSS
+ * @support comment, str, selector, units, function, ...
+ */
+export default /** @satisfies {import('../index.js').ShjGrammar} */ ([
 	{
 		match: /\/\*((?!\*\/)[^])*(\*\/)?/g,
+		type: 'cmnt',
 		sub: 'todo'
 	},
 	{
@@ -8,6 +13,8 @@ export default [
 	},
 	{
 		type: 'kwd',
+		// (?=([a-z-]+))\2 fakes an atomic group (JS has none), avoiding
+		// catastrophic backtracking a plain [a-z-]+ would have here
 		match: /@\w+\b|\b(and|not|only|or)\b|\b(?=([a-z-]+))\2(?=[^{}]*{)/g
 	},
 	{
@@ -53,4 +60,4 @@ export default [
 		type: 'num',
 		match: /\b[a-z-]+\b/g
 	}
-]
+]);

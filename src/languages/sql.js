@@ -1,7 +1,12 @@
-export default [
+/**
+ * @name SQL
+ * @support number, string, function, ...
+ */
+export default /** @satisfies {import('../index.js').ShjGrammar} */ ([
 	{
 		match: /--.*\n?|\/\*((?!\*\/)[^])*(\*\/)?/g,
-		sub: 'todo'
+		type: 'cmnt',
+		sub: 'todo',
 	},
 	{
 		expand: 'str'
@@ -30,4 +35,4 @@ export default [
 		type: 'var',
 		match: /@\S+/g
 	}
-]
+]);

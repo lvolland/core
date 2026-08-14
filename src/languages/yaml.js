@@ -1,6 +1,11 @@
-export default [
+/**
+ * @name YAML
+ * @support comment, numbers, variable, string, bool
+ */
+export default /** @satisfies {import('../index.js').ShjGrammar} */ ([
 	{
 		match: /#.*/g,
+		type: 'cmnt',
 		sub: 'todo'
 	},
 	{
@@ -29,4 +34,4 @@ export default [
 		type: 'var',
 		match: /[a-zA-Z][\w-]*(?=:)/g
 	}
-]
+]);

@@ -1,6 +1,10 @@
-export default [
+/**
+ * @name Python
+ */
+export default /** @satisfies {import('../index.js').ShjGrammar} */ ([
 	{
 		match: /#.*/g,
+		type: 'cmnt',
 		sub: 'todo'
 	},
 	{
@@ -21,6 +25,7 @@ export default [
 	},
 	{
 		match: /("""|''')(\\[^]|(?!\1)[^])*\1?/g,
+		type: 'cmnt',
 		sub: 'todo'
 	},
 	{
@@ -49,4 +54,4 @@ export default [
 		type: 'class',
 		match: /\b[A-Z][\w_]*\b/g
 	}
-]
+]);

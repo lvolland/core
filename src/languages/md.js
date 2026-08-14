@@ -1,6 +1,10 @@
-import { detectLanguage } from '../detect.js'
+/**
+ * @name Markdown
+ */
 
-export default [
+import { detectLanguage } from '../detect.js';
+
+export default /** @satisfies {import('../index.js').ShjGrammar} */ ([
 	{
 		type: 'cmnt',
 		match: /^>.*|(=|-)\1+/gm
@@ -47,4 +51,4 @@ export default [
 			}
 		]
 	}
-]
+]);

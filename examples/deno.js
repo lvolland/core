@@ -1,7 +1,11 @@
-import { languages, themesTerminal } from './data.js'
-import { setTheme, printHighlight, highlightText } from '../src/terminal.js';
+import { parse } from "https://deno.land/std/flags/mod.ts";
 import { fromFileUrl } from 'https://deno.land/std/path/mod.ts';
-import { parse } from "https://deno.land/std/flags/mod.ts"
+import { highlightANSI } from '../src/index.js';
+
+const languages = ['js', 'py', 'bash', 'ts', 'c', 'css', 'asm', 'csv', 'diff', 'docker', 'git', 'go',
+	'html', 'http', 'ini', 'java', 'jsdoc', 'json', 'leanpub-md', 'bf', 'log', 'lua', 'make', 'md',
+	'pl', 'plain', 'regex', 'rs', 'sql', 'todo', 'toml', 'uri', 'xml', 'yaml'];
+const themesTerminal = ['default', 'atom-dark'];
 
 let args = parse(Deno.args)
 
@@ -21,16 +25,14 @@ if (args.help)
 	Deno.exit(0)
 }
 
-if (args.theme)
+if (args.theme && !themesTerminal.includes(args.theme))
 {
-	if (!themesTerminal.includes(args.theme))
-	{
-		console.error(`'${args.theme}' is not a supported try on of the following theme:`)
-		console.log(`${themesTerminal.join(', ')}`)
-		Deno.exit(1)
-	}
-	await setTheme(args.theme)
+	console.error(`'${args.theme}' is not a supported try on of the following theme:`)
+	console.log(`${themesTerminal.join(', ')}`)
+	Deno.exit(1)
 }
+
+const theme = (await import(`../src/themes/${args.theme ?? 'default'}.js`)).default;
 
 if (args.lang && !languages.includes(args.lang))
 {
@@ -55,10 +57,10 @@ if (args.stdin)
 	language = args.lang ?? args._[0]?.split?.('.')?.[1] ?? 'js';
 }
 
-await printHighlight(code, language);
+console.log(await highlightANSI(code, language, theme));
 
 console.time('highlight')
 for (let i = 0; i < 100; i++) {
-	await highlightText(code, language);
+	await highlightANSI(code, language, theme);
 }
 console.timeEnd('highlight')

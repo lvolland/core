@@ -1,6 +1,10 @@
-export default [
+/**
+ * @name INI
+ */
+export default /** @satisfies {import('../index.js').ShjGrammar} */ ([
 	{
 		match: /(^[ \f\t\v]*)[#;].*/gm,
+		type: 'cmnt',
 		sub: 'todo'
 	},
 	{
@@ -19,4 +23,4 @@ export default [
 		type: 'str',
 		match: /.*/g
 	},
-]
+]);
