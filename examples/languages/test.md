@@ -7,6 +7,8 @@ Sub-heading
   Indented sub-heading
   --------------------
 
+## Sub heading
+
 ### Another deeper heading with **bold** and `code`
 
 Paragraphs are separated
